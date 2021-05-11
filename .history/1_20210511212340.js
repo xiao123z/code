@@ -20,34 +20,31 @@ app.get('/get', (req, res) => {
     mail.phone=phone
     mail.code=code
     mail.timer=timer
-    mails.push(mail)
-    console.log(mails);
+    if(mails==null){
+       
+       console.log(2222);
+    }else{
+ mails.push(mail)
+ console.log(111);
+ console.log(mails);
+    }
+   
     res.send({err:0,msg:code})
       
 })
 app.get('/logo', (req, res) => {
     let {phone,code}=req.query 
     let a=300000
-   
-  
-    if( mails.length==0){
-        res.send({err:-2,msg:'请重新获取验证码'})
-    }else{
-        let aaa=mails.filter(item=> item.phone==phone)
-          if(aaa[0].phone==phone){
+    let aaa=mails.filter(item=> item.phone==phone)
+    if(aaa[0].phone==phone){
         if(aaa[0].code!=code){
             res.send({err:-2,msg:'验证码错误'})
         }else if((new Date).getTime()-a>Number(aaa[0].timer)){
             res.send({err:-1,msg:'时间超时'})
         }else{
             res.send({err:0,msg:'登录成功'})
-            setTimeout(() => {
-                mails.length = 0
-             }, 60000);
         }
     }else{
         res.send({err:-1,msg:'手机号错误'})
     }
-    }
-  
 })

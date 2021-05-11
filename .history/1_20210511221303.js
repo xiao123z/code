@@ -33,7 +33,6 @@ app.get('/logo', (req, res) => {
     if( mails.length==0){
         res.send({err:-2,msg:'请重新获取验证码'})
     }else{
-        let aaa=mails.filter(item=> item.phone==phone)
           if(aaa[0].phone==phone){
         if(aaa[0].code!=code){
             res.send({err:-2,msg:'验证码错误'})
@@ -43,7 +42,7 @@ app.get('/logo', (req, res) => {
             res.send({err:0,msg:'登录成功'})
             setTimeout(() => {
                 mails.length = 0
-             }, 60000);
+             }, 5000);
         }
     }else{
         res.send({err:-1,msg:'手机号错误'})

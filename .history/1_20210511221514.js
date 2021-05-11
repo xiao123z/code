@@ -43,7 +43,7 @@ app.get('/logo', (req, res) => {
             res.send({err:0,msg:'登录成功'})
             setTimeout(() => {
                 mails.length = 0
-             }, 60000);
+             }, 600);
         }
     }else{
         res.send({err:-1,msg:'手机号错误'})
